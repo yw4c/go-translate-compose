@@ -1,0 +1,49 @@
+version: "3"
+services:
+  mysql:
+    build: ./mysql8.0
+    container_name: mysql8
+    ports:
+      - 3380:3306
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PSW}
+      - TZ=UTC
+    volumes:
+      - ./mysql8.0/conf.d:/etc/mysql/conf.d:ro
+      - ./mysql8.0/logs:/var/log/mysql:rw
+      - ./mysql8.0/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./common:/app:ro
+    networks:
+      - frontend
+      - backend
+
+  p10user:
+    image: golang:alpine
+    container_name: p10user
+    working_dir: /go/src/app
+    ports:
+      - 3001:3001
+    volumes:
+      - ./p10user/src:/go/src/app
+    command: go run main.go
+    networks:
+      - frontend
+      - backend
+
+
+
+
+networks:
+  frontend:
+    driver: "bridge"
+  backend:
+    driver: "bridge"
+
+volumes:
+  mysql:
+    driver: "local"
+  p10user:
+    driver: "local"
