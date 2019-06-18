@@ -21,17 +21,22 @@ services:
       - backend
 
   p10user:
-    image: golang:alpine
+    build: ./golang
     container_name: p10user
-    working_dir: /go/src/app
     ports:
       - 3001:3001
     volumes:
-      - ./p10user/src:/go/src/app
-    command: go run main.go
+      - ./p10user:/go/src/app
+    command: >
+      sh -c "
+        export GO111MODULE=on &&
+        go mod download &&
+        go run src/main.go
+      "
     networks:
       - frontend
       - backend
+
 
 
 

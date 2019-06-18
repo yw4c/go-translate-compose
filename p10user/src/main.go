@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 	"net/http"
 	"os"
-	//"github.com/gin-gonic/gin"
-	//"github.com/jinzhu/gorm"
-
 )
 func main() {
 	fmt.Println("hello")
@@ -20,18 +19,18 @@ func main() {
 	http.ListenAndServe(":" + PORT, nil)
 
 
-	//r:= gin.Default()
-	//r.GET("/ping", func(c *gin.Context) {
-	//	c.JSON(200, gin.H{
-	//		"message": "pong",
-	//	})
-	//})
-	//r.Run()
+	r:= gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run()
 
-	//db, err := gorm.Open("sqlite3", "test.db")
+	db, _ := gorm.Open("sqlite3", "test.db")
 
-	//db, err := gorm.Open("mysql", "user:password@/dbname?charset=utf8&parseTime=True&loc=Local")
-	//defer db.Close()
+
+	defer db.Close()
 
 }
 
