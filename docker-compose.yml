@@ -4,7 +4,7 @@ services:
     build: ./mysql8.0
     container_name: mysql8
     ports:
-      - 3380:3306
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=${MYSQL_DB}
       - MYSQL_USER=${MYSQL_USER}
@@ -21,12 +21,17 @@ services:
       - backend
 
   p10user:
-    build: ./p10user
+    build:
+      context: ./p10user
+      args:
+        work_path: /go/src/app
     container_name: p10user
     ports:
       - 3001:3001
     volumes:
       - ./p10user:/go/src/app
+    depends_on:
+      - mysql
     command: >
       sh -c "
         go run src/main.go
@@ -35,8 +40,10 @@ services:
       - frontend
       - backend
 
-
-
+# migrate -path ./migration -database mysql://root:${MYSQL_ROOT_PSW}@tcp\(mysql8:3306\)/${MYSQL_DB} up && \
+# error: dial tcp 192.168.0.2:3306: connect: connection refused
+# use :
+# migrate -path ./migration -database mysql://root:1234@tcp\(127.0.0.1:3306\)/translate up
 
 
 networks:
