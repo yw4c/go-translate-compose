@@ -4,7 +4,7 @@ services:
     build: ./mysql8.0
     container_name: mysql8
     ports:
-      - 3306:3306
+      - 3306:${MYSQL_PORT}
     environment:
       - MYSQL_DATABASE=${MYSQL_DB}
       - MYSQL_USER=${MYSQL_USER}
@@ -40,6 +40,19 @@ services:
       - frontend
       - backend
 
+
+  adminer:
+    build: ./docker-adminer/4
+    ports:
+      - 8080:${ADMINER_PORT}
+    networks:
+      - frontend
+      - backend
+
+
+# todo : auto migrate
+#  RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.4.0/migrate.linux-amd64.tar.gz | tar xvz \
+#  && mv migrate.linux-amd64 /bin/migrate
 # migrate -path ./migration -database mysql://root:${MYSQL_ROOT_PSW}@tcp\(mysql8:3306\)/${MYSQL_DB} up && \
 # error: dial tcp 192.168.0.2:3306: connect: connection refused
 # use :
@@ -57,3 +70,6 @@ volumes:
     driver: "local"
   p10user:
     driver: "local"
+  adminer:
+    driver: "local"
+
