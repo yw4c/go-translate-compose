@@ -6,21 +6,28 @@ import (
 )
 
 type loginRequest struct {
-	username string `json:"s"`
-	password string `json:"s"`
-	Err string `json:"err,omitempty"`
+	username string
+	password string
 }
 
 type LoginResponse struct {
-	V   string `json:"v"`
-	Err string `json:"err,omitempty"` // errors don't JSON-marshal, so we use a string
+	Token   string `json:"token"`
+	Err error `json:"err,omitempty"` // errors don't JSON-marshal, so we use a string
 }
 
 func makeLoginEndpoint(s IService) endpoint.Endpoint{
 
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		//req := request.(loginRequest)
-		//s.Login(req)
-		//response
+		req := request.(loginRequest)
+
+		var token string
+
+		if t, e := s.Login(req.username, req.password) ;e!= nil {
+			token = t
+			err = e
+		}
+
+
+		return LoginResponse{Token: token, Err: err }, err
 	}
 }

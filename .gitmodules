@@ -1,0 +1,3 @@
+[submodule "docker-adminer"]
+	path = docker-adminer
+	url = https://github.com/TimWolla/docker-adminer.git
