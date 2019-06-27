@@ -1,34 +1,55 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	"context"
+
+	kitGrpc "github.com/go-kit/kit/transport/grpc"
 	"log"
+	"net"
+	pb "translate/P10User/src/pb"
+	"google.golang.org/grpc"
 )
+
+const (
+	port = ":50052"
+)
+
+
+type UserServer struct {
+	loginHandler kitGrpc.Handler
+}
+func (us UserServer) Login(ctx context.Context,request *pb.LoginRequest) (*pb.LoginReply, error) {
+	_, rsp, err := us.loginHandler.ServeGRPC(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	return rsp.(*pb.LoginReply), err
+}
 
 func main() {
 
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
-	router:= gin.Default()
-
-	v1 := router.Group("/v1")
-	{
-		v1.POST("/register", func(context *gin.Context) {
-
-		})
-
-		v1.GET("/show", func(context *gin.Context) {
-			router.Use()
-		})
+	userServer := UserServer{
+		loginHandler: kitGrpc.NewServer(makeLoginEndpoint(&service{}), decodeRequest, encodeResponse),
 	}
 
 
 
-	router.Run(":3001")
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
 
+	gs := grpc.NewServer()
+	pb.RegisterUserServer(gs, userServer)
+	gs.Serve(lis)
 
 }
 
+func decodeRequest(_ context.Context, req interface{}) (interface{}, error) {
+	return req, nil
+}
+
+func encodeResponse(_ context.Context, rsp interface{}) (interface{}, error) {
+	return rsp, nil
+}
