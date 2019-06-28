@@ -2,7 +2,7 @@ package src
 
 import (
 	"github.com/gin-gonic/gin"
-	"translate/P10User/src/rpc"
+	"translate/P10User/src/rpc-cli"
 )
 
 func main() {
@@ -10,8 +10,8 @@ func main() {
 
 	v1 := r.Group("/v1")
 	{
-		userRpc := rpc.User{};
-		v1.POST("/user/login", userRpc.Handler())
+		//userRpc := rpc-cli.User{};
+		//v1.POST("/user/login", userRpc.Handler())
 	}
 
 }

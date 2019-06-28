@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"errors"
@@ -13,15 +13,15 @@ type IService interface {
 	Show()
 }
 
-type service struct {
+type UserService struct {
 
 }
 
-func (s *service) Register() {
+func (s *UserService) Register() {
 	log.Print("this is register")
 }
 
-func (s *service) Login(username string ,password string) (token string, err error)  {
+func (s *UserService) Login(username string ,password string) (token string, err error)  {
 
 	if username == "ben" && password == "123123" {
 		log.Print("this is login")
@@ -35,6 +35,6 @@ func (s *service) Login(username string ,password string) (token string, err err
 
 }
 
-func (s *service) Show() {
+func (s *UserService) Show() {
 	log.Print("this is show")
 }

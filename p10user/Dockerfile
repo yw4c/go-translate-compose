@@ -13,5 +13,5 @@ RUN apk update && apk upgrade && \
 # go module
 ENV GO111MODULE=on
 RUN go mod download
-
+RUN go env
 

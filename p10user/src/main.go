@@ -2,16 +2,29 @@ package main
 
 import (
 	"context"
-
 	kitGrpc "github.com/go-kit/kit/transport/grpc"
+	"google.golang.org/grpc"
 	"log"
 	"net"
-	pb "translate/P10User/src/pb"
-	"google.golang.org/grpc"
+	"translate/P10User/src/endpoint"
+	"translate/P10User/src/pb"
+	"translate/P10User/src/service"
 )
 
-const (
-	port = ":50052"
+var (
+	// etcd服务地址
+	etcdServer = "consul1:8400"
+	// 服务的信息目录
+	prefix     = "/services/user/"
+	// 当前启动服务实例的地址
+	instance   = "p10user:50052"
+	// 服务实例注册的路径
+	key        = prefix + instance
+	// 服务实例注册的val
+	value      = instance
+	ctx        = context.Background()
+	// 服务监听地址
+	serviceAddress = ":50052"
 )
 
 
@@ -30,12 +43,11 @@ func main() {
 
 
 	userServer := UserServer{
-		loginHandler: kitGrpc.NewServer(makeLoginEndpoint(&service{}), decodeRequest, encodeResponse),
+		loginHandler: kitGrpc.NewServer(endpoint.MakeLoginEndpoint(&service.UserService{}), decodeRequest, encodeResponse),
 	}
 
 
-
-	lis, err := net.Listen("tcp", port)
+	lis, err := net.Listen("tcp", serviceAddress)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -43,7 +55,6 @@ func main() {
 	gs := grpc.NewServer()
 	pb.RegisterUserServer(gs, userServer)
 	gs.Serve(lis)
-
 }
 
 func decodeRequest(_ context.Context, req interface{}) (interface{}, error) {

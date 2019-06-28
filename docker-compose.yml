@@ -27,18 +27,32 @@ services:
         work_path: /go/src/app
     container_name: p10user
     ports:
-      - 3001:3001
+      - 50010:${P10_RPC_PORT}
     volumes:
       - ./p10user:/go/src/app
     depends_on:
       - mysql
+      - consul1
     command: >
       sh -c "
         go run src/main.go
       "
     networks:
+      - backend
+
+  consul1:
+    image: consul:latest
+    container_name: consul1
+    restart: always
+    ports:
+      - 8500:8500
+      - 8600:8600
+    command: consul agent -server  -dev -bind=127.0.0.1 -bootstrap-expect=1 -node=consul1 -client 0.0.0.0
+    networks:
       - frontend
       - backend
+
+
 
 
   adminer:
@@ -71,5 +85,7 @@ volumes:
   p10user:
     driver: "local"
   adminer:
+    driver: "local"
+  consul1:
     driver: "local"
 
