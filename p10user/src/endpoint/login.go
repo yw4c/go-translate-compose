@@ -1,26 +1,27 @@
 package endpoint
+
 import (
 	"context"
-	"github.com/go-kit/kit/endpoint"
-	pb "translate/P10User/src/pb"
+	pb "translate/P10User/src/pb/user"
 	"translate/P10User/src/service"
 )
 
+type UserEndpoints struct {
 
-
-func MakeLoginEndpoint(s service.IService) endpoint.Endpoint{
-
-	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		req := request.(pb.LoginRequest)
-
-		var token string
-
-		if t, e := s.Login(req.Username, req.Password) ;e!= nil {
-			token = t
-			err = e
-		}
-
-
-		return pb.LoginReply{Token: token }, err
-	}
 }
+
+func (*UserEndpoints) Login(ctx context.Context, req *pb.LoginRequest) (resp *pb.LoginReply,err error) {
+
+	// todo: validate request so on
+
+	service := &service.UserService{}
+	token, err := service.Login(req.Username, req.Password)
+
+	resp = &pb.LoginReply{
+		Token:token,
+	}
+
+	return
+
+}
+

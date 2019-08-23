@@ -10,8 +10,8 @@ func main() {
 
 	v1 := r.Group("/v1")
 	{
-		//userRpc := rpc-cli.User{};
-		//v1.POST("/user/login", userRpc.Handler())
+		userRpc := rpc-cli.User{};
+		v1.POST("/user/login", userRpc.Handler())
 	}
 
 }

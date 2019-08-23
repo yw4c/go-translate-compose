@@ -1,24 +1,24 @@
 version: "3"
 services:
-  mysql:
-    build: ./mysql8.0
-    container_name: mysql8
-    ports:
-      - 3306:${MYSQL_PORT}
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DB}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PSW}
-      - TZ=UTC
-    volumes:
-      - ./mysql8.0/conf.d:/etc/mysql/conf.d:ro
-      - ./mysql8.0/logs:/var/log/mysql:rw
-      - ./mysql8.0/initdb.d:/docker-entrypoint-initdb.d:ro
-      - ./common:/app:ro
-    networks:
-      - frontend
-      - backend
+#  mysql:
+#    build: ./mysql8.0
+#    container_name: mysql8
+#    ports:
+#      - 3306:${MYSQL_PORT}
+#    environment:
+#      - MYSQL_DATABASE=${MYSQL_DB}
+#      - MYSQL_USER=${MYSQL_USER}
+#      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PSW}
+#      - TZ=UTC
+#    volumes:
+#      - ./mysql8.0/conf.d:/etc/mysql/conf.d:ro
+#      - ./mysql8.0/logs:/var/log/mysql:rw
+#      - ./mysql8.0/initdb.d:/docker-entrypoint-initdb.d:ro
+#      - ./common:/app:ro
+#    networks:
+#      - frontend
+#      - backend
 
   p10user:
     build:
@@ -27,12 +27,9 @@ services:
         work_path: /go/src/app
     container_name: p10user
     ports:
-      - 50010:${P10_RPC_PORT}
+      - 50000:50000
     volumes:
       - ./p10user:/go/src/app
-    depends_on:
-      - mysql
-      - consul1
     command: >
       sh -c "
         go run src/main.go
@@ -40,28 +37,28 @@ services:
     networks:
       - backend
 
-  consul1:
-    image: consul:latest
-    container_name: consul1
-    restart: always
-    ports:
-      - 8500:8500
-      - 8600:8600
-    command: consul agent -server  -dev -bind=127.0.0.1 -bootstrap-expect=1 -node=consul1 -client 0.0.0.0
-    networks:
-      - frontend
-      - backend
-
-
-
-
-  adminer:
-    build: ./docker-adminer/4
-    ports:
-      - 8080:${ADMINER_PORT}
-    networks:
-      - frontend
-      - backend
+#  consul1:
+#    image: consul:latest
+#    container_name: consul1
+#    restart: always
+#    ports:
+#      - 8500:8500
+#      - 8600:8600
+#    command: consul agent -server  -dev -bind=127.0.0.1 -bootstrap-expect=1 -node=consul1 -client 0.0.0.0
+#    networks:
+#      - frontend
+#      - backend
+#
+#
+#
+#
+#  adminer:
+#    build: ./docker-adminer/4
+#    ports:
+#      - 8080:${ADMINER_PORT}
+#    networks:
+#      - frontend
+#      - backend
 
 
 # todo : auto migrate

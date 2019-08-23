@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package pb;
+package user;
 
 service User {
     // Sends a greeting
@@ -16,4 +16,5 @@ message LoginRequest {
 // The response message containing the greetings
 message LoginReply {
     string Token = 1;
+    string ErrorCode =2;
 }
