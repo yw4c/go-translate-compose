@@ -1,14 +1,27 @@
 {
   "services": [
     {
+      "id": "1566208160",
+      "name": "p005api-http",
+      "tags": ["primary"],
+      "address": "p005api",
+      "port": 8080,
+      "checks": [
+        {
+          "http": "http://p005api:8080/api/health",
+          "interval": "30s"
+        }
+      ]
+    },
+    {
       "id": "1566208161",
       "name": "user-grpc",
       "tags": ["primary"],
-      "address": "p10user",
+      "address": "p010user",
       "port": 6000,
       "checks": [
         {
-          "tcp": "p10user:6000",
+          "tcp": "p010user:6000",
           "interval": "10s"
         }
       ]

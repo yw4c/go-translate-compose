@@ -20,26 +20,9 @@ services:
 #      - frontend
 #      - backend
 
-  p10user:
-    build:
-      context: ./p10user
-      args:
-        work_path: /go/src/app
-    container_name: p10user
-    ports:
-      - 6010:6000
-    volumes:
-      - ./p10user:/go/src/app
-    command: >
-      sh -c "
-        go run src/main.go
-      "
-    networks:
-      - backend
-
+  # consul server
   consul001:
     image: consul
-    container_name: consul001
     command: >
       sh -c "
         consul agent -server -data-dir /tmp/node1 -node=consul001  -bootstrap-expect=1  -bind=0.0.0.0 -client=0.0.0.0 -ui
@@ -53,7 +36,6 @@ services:
   # consul client
   consul002:
     image: consul
-    container_name: consul002
     depends_on:
     - consul001
     command: >
@@ -71,6 +53,42 @@ services:
     - ./consul/config:/consul/config
     networks:
     - backend
+
+  p005api:
+    build:
+      context: ./p005api
+      args:
+        work_path: /go/src/app
+    ports:
+    - 80:8080
+    volumes:
+    - ./p005api:/go/src/app
+    - ./pb:/go/src/pb
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+    - backend  
+
+  p010user:
+    build:
+      context: ./p010user
+      args:
+        work_path: /go/src/app
+    ports:
+      - 6010:6000
+    volumes:
+      - ./p010user:/go/src/app
+      - ./pb:/go/src/pb
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+      - backend
+
+
 
 
 #  adminer:
