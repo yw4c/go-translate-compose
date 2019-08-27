@@ -15,3 +15,4 @@ ENV GO111MODULE=on
 RUN go mod download
 RUN go env
 
+EXPOSE 6000

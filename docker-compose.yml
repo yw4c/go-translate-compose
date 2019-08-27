@@ -27,7 +27,7 @@ services:
         work_path: /go/src/app
     container_name: p10user
     ports:
-      - 50000:50000
+      - 6010:6000
     volumes:
       - ./p10user:/go/src/app
     command: >
@@ -37,21 +37,42 @@ services:
     networks:
       - backend
 
-#  consul1:
-#    image: consul:latest
-#    container_name: consul1
-#    restart: always
-#    ports:
-#      - 8500:8500
-#      - 8600:8600
-#    command: consul agent -server  -dev -bind=127.0.0.1 -bootstrap-expect=1 -node=consul1 -client 0.0.0.0
-#    networks:
-#      - frontend
-#      - backend
-#
-#
-#
-#
+  consul001:
+    image: consul
+    container_name: consul001
+    command: >
+      sh -c "
+        consul agent -server -data-dir /tmp/node1 -node=consul001  -bootstrap-expect=1  -bind=0.0.0.0 -client=0.0.0.0 -ui
+      "
+    ports:
+    - 8500:8500
+    networks:
+    - backend
+
+
+  # consul client
+  consul002:
+    image: consul
+    container_name: consul002
+    depends_on:
+    - consul001
+    command: >
+      sh -c "
+        consul agent \
+        -data-dir /tmp/node2 \
+        -node=consul002 \
+        -retry-join=consul001 \
+        -bind=0.0.0.0 \
+        -client=0.0.0.0 \
+        -config-dir /consul/config/ \
+        -enable-local-script-checks
+      "
+    volumes:
+    - ./consul/config:/consul/config
+    networks:
+    - backend
+
+
 #  adminer:
 #    build: ./docker-adminer/4
 #    ports:
@@ -71,18 +92,7 @@ services:
 
 
 networks:
-  frontend:
-    driver: "bridge"
   backend:
     driver: "bridge"
 
-volumes:
-  mysql:
-    driver: "local"
-  p10user:
-    driver: "local"
-  adminer:
-    driver: "local"
-  consul1:
-    driver: "local"
 

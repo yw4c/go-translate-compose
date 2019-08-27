@@ -10,7 +10,7 @@ import (
 )
 
 func TestLogin(t *testing.T) {
-	conn, err := grpc.Dial("localhost:50000", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:6010", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
