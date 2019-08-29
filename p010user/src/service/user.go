@@ -1,11 +1,11 @@
 package service
 
 import (
-	"errors"
 	"log"
+	grpc_err "translate/P10User/src/error/grpc"
 )
 
-var ErrLoginInvalid = errors.New("username or password were wrong")
+
 
 type IService interface {
 	Register()
@@ -28,7 +28,7 @@ func (s *UserService) Login(username string ,password string) (token string, err
 		token = "abc123"
 		err = nil
 	} else {
-		err = ErrLoginInvalid
+		err = grpc_err.NewGrpcError(grpc_err.LoginFail)
 	}
 
 	return token, err

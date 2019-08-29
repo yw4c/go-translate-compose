@@ -7,7 +7,7 @@ import (
 	"log"
 	"net"
 	"translate/P10User/src/endpoint"
-	pb "translate/P10User/src/pb/user"
+	pb "translate/P10User/src/pb/p010user"
 )
 
 func main() {

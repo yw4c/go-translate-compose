@@ -80,9 +80,10 @@ services:
       - 6010:6000
     volumes:
       - ./p010user:/go/src/app
-      - ./pb:/go/src/pb
+      - ./pb:/go/src/app/src/pb
     command: >
       sh -c "
+        ls /go/src/app/src/pb/p010user/ && \
         go run src/main.go
       "
     networks:
