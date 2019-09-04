@@ -24,6 +24,7 @@ func (s *UserService) Register() {
 func (s *UserService) Login(username string ,password string) (token string, err error)  {
 
 	if username == "ben" && password == "123123" {
+
 		log.Print("this is login")
 		token = "abc123"
 		err = nil

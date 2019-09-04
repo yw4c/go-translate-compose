@@ -1,10 +1,10 @@
-package endpoint
+package v1
 
 import (
 	"context"
 	"google.golang.org/grpc"
 	"testing"
-	pb "translate/P10User/src/pb/p010user"
+	pb "translate/P10User/src/pb/p010user/v1"
 	grpc_err "translate/P10User/src/error/grpc"
 )
 

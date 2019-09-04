@@ -1,4 +1,6 @@
 
+
+
 ## Services
 name  | description
 ---- | --- 
@@ -8,10 +10,19 @@ p010user | 用戶服務
 ## ports
 port  | description
 ---- | --- 
-6001-6999 | grpc testing 
+6001-6999 | GRPC testing 
 80 | p005api
+8080 | Adminer - mysql cli
+8081 | Kibana - ES UI
 8500 | Consul UI
+9200 | Elasticsearch
+9300 | Elasticsearch
 
+
+## Deploy
+````
+# migrate -path ./migration -database mysql://root:1234@tcp\(127.0.0.1:3306\)/translate up
+````
 
 ## Protobuf
 ###  生成 pb 

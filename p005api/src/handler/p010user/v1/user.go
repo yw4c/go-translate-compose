@@ -1,11 +1,11 @@
-package p010user
+package v1
 
 import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"log"
 
-	pb "translate/P005api/src/pb/p010user"
+	pb "translate/P005api/src/pb/p010user/v1"
 )
 
 const addr  = "p010user:6000"
@@ -15,7 +15,7 @@ func LoginHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		conn, err := grpc.Dial(addr, grpc.WithInsecure())
 		if err != nil {
-			log.Fatalf("did not connect: %v", err)
+			log.Panicf("did not connect: %v", err)
 		}
 		defer conn.Close()
 		client := pb.NewUserClient(conn)
