@@ -4,33 +4,30 @@ services:
 ###################################### Database ########################################
 ########################################################################################
 
-#  mysql:
-#    build: ./mysql8.0
-#    container_name: mysql8
-#    ports:
-#      - 3306:${MYSQL_PORT}
-#    environment:
-#      - MYSQL_DATABASE=${MYSQL_DB}
-#      - MYSQL_USER=${MYSQL_USER}
-#      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PSW}
-#      - TZ=UTC
-#    volumes:
-#      - ./mysql8.0/conf.d:/etc/mysql/conf.d:ro
-#      - ./mysql8.0/logs:/var/log/mysql:rw
-#      - ./mysql8.0/initdb.d:/docker-entrypoint-initdb.d:ro
-#      - ./common:/app:ro
-#    networks:
-#      - frontend
-#      - backend
+  mysql:
+    build:
+      context: ./mysql
+      args:
+      - MYSQL_VERSION=${MYSQL_VERSION}
+    environment:
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+    - mysql:/var/lib/mysql
+    - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    ports:
+    - "${MYSQL_PORT}:3306"
+    networks:
+    - backend
 
-#  adminer:
-#    build: ./docker-adminer/4
-#    ports:
-#      - 8080:${ADMINER_PORT}
-#    networks:
-#      - frontend
-#      - backend
+  adminer:
+    build: ./docker-adminer/4
+    ports:
+      - ${ADMINER_PORT}:8080
+    networks:
+      - backend
 
 
 ###################################### Consul ##########################################
@@ -114,7 +111,7 @@ services:
     - backend
 
 
-  # 可視化
+  # UI
   kibana:
     image: docker.elastic.co/kibana/kibana:6.5.2
     environment:
@@ -174,4 +171,6 @@ networks:
 
 volumes:
   elasticsearch:
+    driver: local
+  mysql:
     driver: local
