@@ -1,20 +1,20 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"os"
+	"translate/P10User/src/config"
 	"translate/P10User/src/endpoint/v1"
 	pb "translate/P10User/src/pb/p010user/v1"
+	mLog "translate/P10User/src/lib/log"
 )
 
 func main() {
 
-	logrus.SetFormatter(&logrus.TextFormatter{})
-	logrus.SetOutput(os.Stdout)
+	config.LoadEnv("")
+	mLog.Setup()
 
 	lis, err := net.Listen("tcp", ":6000")
 	if err != nil {

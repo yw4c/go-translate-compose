@@ -20,16 +20,17 @@ func TestLogin(t *testing.T) {
 	{
 		r, err := client.Login(context.Background(), &pb.LoginRequest{
 			Username: "ben",
-			Password: "123123",
+			Password: "1234",
 		})
 		if err != nil {
 			t.Logf("could not greet: %v", err.Error())
 			t.Fail()
 		}
-		t.Log(r)
 		if r.GetError() != nil {
 			t.Log(r.GetError().GetMessage())
 			t.Fail()
+		} else {
+			t.Log(r)
 		}
 	}
 

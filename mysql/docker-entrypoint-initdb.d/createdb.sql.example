@@ -25,4 +25,9 @@
 #CREATE DATABASE IF NOT EXISTS `dev_db_3` COLLATE 'utf8_general_ci' ;
 #GRANT ALL ON `dev_db_3`.* TO 'default'@'%' ;
 
+CREATE DATABASE IF NOT EXISTS `p010user` COLLATE 'utf8_general_ci' ;
+CREATE USER IF NOT EXISTS 'p010user'@'%' IDENTIFIED BY '1234';
+GRANT ALL ON `p010user`.* TO 'p010user'@'%' ;
+
+
 FLUSH PRIVILEGES ;
