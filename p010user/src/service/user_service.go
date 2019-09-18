@@ -12,12 +12,16 @@ import (
 
 
 type UserService struct {
-
+	userRepository repository.IUserRepository
 }
 
-func (s *UserService) Register() {
-	log.Print("this is register")
+func NewUserService(userRepository repository.IUserRepository) *UserService {
+
+	return &UserService {
+		userRepository: userRepository,
+	}
 }
+
 
 func (s *UserService) Login(username string ,password string) (token string, err error)  {
 
@@ -32,8 +36,8 @@ func (s *UserService) Login(username string ,password string) (token string, err
 		Password:md5str1,
 	}
 
-	repo := repository.UserRepository{}
-	if user := repo.FindOne(filter); user == nil {
+
+	if user := s.userRepository.FindOne(filter); user == nil {
 		err = grpc_err.NewGrpcError(grpc_err.LoginFail)
 	} else {
 		token = "123"
