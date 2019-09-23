@@ -19,4 +19,3 @@ func TestLogin(t *testing.T) {
 	t.Logf("token : %s", token)
 
 }
-

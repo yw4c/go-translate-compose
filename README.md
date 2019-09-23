@@ -4,7 +4,7 @@
 ## Services
 name  | description
 ---- | --- 
-p005api |  restful api 請求、回應
+p005api |  restful api 
 p010user | 用戶服務
 
 ## ports
