@@ -34,39 +34,39 @@ services:
 ###################################### Consul ##########################################
 ########################################################################################
 
-  # consul server
-  consul001:
-    image: consul
-    command: >
-      sh -c "
-        consul agent -server -data-dir /tmp/node1 -node=consul001  -bootstrap-expect=1  -bind=0.0.0.0 -client=0.0.0.0 -ui
-      "
-    ports:
-    - 8500:8500
-    networks:
-    - backend
-
-
-  # consul client
-  consul002:
-    image: consul
-    depends_on:
-    - consul001
-    command: >
-      sh -c "
-        consul agent \
-        -data-dir /tmp/node2 \
-        -node=consul002 \
-        -retry-join=consul001 \
-        -bind=0.0.0.0 \
-        -client=0.0.0.0 \
-        -config-dir /consul/config/ \
-        -enable-local-script-checks
-      "
-    volumes:
-    - ./consul/config:/consul/config
-    networks:
-    - backend
+#  # consul server
+#  consul001:
+#    image: consul
+#    command: >
+#      sh -c "
+#        consul agent -server -data-dir /tmp/node1 -node=consul001  -bootstrap-expect=1  -bind=0.0.0.0 -client=0.0.0.0 -ui
+#      "
+#    ports:
+#    - 8500:8500
+#    networks:
+#    - backend
+#
+#
+#  # consul client
+#  consul002:
+#    image: consul
+#    depends_on:
+#    - consul001
+#    command: >
+#      sh -c "
+#        consul agent \
+#        -data-dir /tmp/node2 \
+#        -node=consul002 \
+#        -retry-join=consul001 \
+#        -bind=0.0.0.0 \
+#        -client=0.0.0.0 \
+#        -config-dir /consul/config/ \
+#        -enable-local-script-checks
+#      "
+#    volumes:
+#    - ./consul/config:/consul/config
+#    networks:
+#    - backend
 
 
 ################################## Log ELK@6.5.2 ########################################

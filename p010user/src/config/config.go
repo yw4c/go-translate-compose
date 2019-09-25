@@ -9,7 +9,7 @@ func LoadEnv(envPath string) {
 	viper.SetConfigName("env")
 
 	if envPath == "" {
-		viper.AddConfigPath("$GOPATH/src/app")
+		viper.AddConfigPath("$GOPATH/src/p010user")
 	} else {
 		viper.AddConfigPath(envPath)
 	}
