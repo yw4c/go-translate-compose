@@ -9,12 +9,7 @@ import (
 )
 
 type DefaultConn struct {
-	Username string
-	Password string
-	Addr string
-	Database string
-	Driver string
-	ConnectionQuery string
+	conn
 }
 
 func (c *DefaultConn) Init()   {
@@ -32,21 +27,3 @@ func (c *DefaultConn) Init()   {
 
 }
 
-func (c *DefaultConn) GetConnQuery() string{
-	if c.ConnectionQuery == "" {
-		panic("Conn has not set up, call Init() first")
-	}
-	return  c.ConnectionQuery
-}
-func (c *DefaultConn) GetDriver() string{
-	if c.Driver == "" {
-		panic("Conn has not set up, call Init() first")
-	}
-	return c.Driver
-}
-func (c *DefaultConn) GetDatabase() string {
-	if c.Driver == "" {
-		panic("Conn has not set up, call Init() first")
-	}
-	return c.Database
-}
