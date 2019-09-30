@@ -1,4 +1,8 @@
-
+## Running Project
+### 1. Load sub-modules 
+````
+git submodule ...
+````
 
 
 ## Services
@@ -19,12 +23,9 @@ port  | description
 9300 | Elasticsearch
 
 
-## Deploy
-````
-# migrate -path ./migration -database mysql://root:1234@tcp\(127.0.0.1:3306\)/translate up
-````
 
-## Protobuf
+
+### Protobuf
 ###  生成 pb 
 ````
 # ./pb

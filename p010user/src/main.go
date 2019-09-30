@@ -5,16 +5,15 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"translate/P10User/src/config"
+	"translate/P10User/src/bootstrap"
 	"translate/P10User/src/endpoint/v1"
 	pb "translate/P10User/src/pb/p010user/v1"
-	mLog "translate/P10User/src/lib/log"
 )
 
 func main() {
 
-	config.LoadEnv("")
-	mLog.Setup()
+	bootstrap.New(bootstrap.INTEGRATION).Boot()
+
 
 	lis, err := net.Listen("tcp", ":6000")
 	if err != nil {

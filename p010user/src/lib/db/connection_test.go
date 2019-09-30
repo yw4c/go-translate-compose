@@ -2,17 +2,15 @@ package db
 
 import (
 	"testing"
-	"translate/P10User/src/lib/utest"
+	"translate/P10User/src/bootstrap"
+
 )
 func init() {
-	utest.Init()
+	bootstrap.New(bootstrap.TEST).Boot()
 }
 
 func TestConn(t *testing.T) {
 
-	db := NewConn(&LocalConn{})
-	if err := db.DB().Ping(); err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	}
+	NewConn(&LocalConn{})
+
 }

@@ -13,8 +13,10 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/jinzhu/gorm v1.9.10
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
+	github.com/mitchellh/go-homedir v1.1.0
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/sirupsen/logrus v1.4.2
+	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0
 	github.com/stretchr/testify v1.4.0 // indirect
 	go.uber.org/dig v1.7.0

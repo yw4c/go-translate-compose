@@ -14,5 +14,9 @@ func NewConn(conn IConn) *gorm.DB {
 	if err != nil {
 		logrus.Panic(err)
 	}
+
+	if err := db.DB().Ping(); err != nil {
+		logrus.Panic(err)
+	}
 	return db
 }

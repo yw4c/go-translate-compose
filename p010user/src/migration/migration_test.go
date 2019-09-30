@@ -4,12 +4,13 @@ import (
 	"log"
 	"runtime/debug"
 	"testing"
+	"translate/P10User/src/bootstrap"
 	"translate/P10User/src/lib/db"
-	"translate/P10User/src/lib/utest"
+
 )
 
 func init() {
-	utest.Init()
+	bootstrap.New(bootstrap.TEST).Boot()
 }
 
 func TestMigrate(t *testing.T) {

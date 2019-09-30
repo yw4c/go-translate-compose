@@ -2,7 +2,9 @@ package migration
 
 import (
 	"database/sql"
+	"github.com/spf13/viper"
 	"log"
+	"os"
 	mDB "translate/P10User/src/lib/db"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -33,8 +35,9 @@ func New(conn mDB.IConn) *MigrationImpl{
 		log.Panic(err.Error())
 	}
 
+	path := os.Getenv("GOPATH")+viper.GetString("APP_PATH")+"src/migration/migration"
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://migration",
+		"file://"+path,
 		conn.GetDatabase(),
 		driver,
 	)
