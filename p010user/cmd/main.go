@@ -15,8 +15,12 @@ limitations under the License.
 */
 package main
 
-import "translate/P10User/cmd/cmd"
+import (
+  "translate/P10User/cmd/cmd"
+  "translate/P10User/src/bootstrap"
+)
 
 func main() {
+  bootstrap.New(bootstrap.CMD).Boot()
   cmd.Execute()
 }

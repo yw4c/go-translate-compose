@@ -1,6 +1,16 @@
 # Api Document
 ## 目錄
-1. [玩家登入](#玩家登入)
+1. [註冊](#註冊)
+1. [登入](#登入)
+1. [更新原生語言](#更新原生語言)
+1. [字典-新增](#字典-新增)
+1. [字典-搜尋](#字典-搜尋)
+1. [翻譯](#翻譯)
+1. [單字卡-新增](#單字卡-新增)
+1. [單字卡-搜尋](#單字卡-搜尋)
+1. [單字卡-刪除](#單字卡-刪除)
+1. [單字卡-評分](#單字卡-評分)
+
 
 ## 共用參數
 ### Errors
@@ -42,14 +52,9 @@ to | int | 本頁到第 n 筆結束
 ```json
 {
     "current_page": 1,
-    "first_page_url": "http:\/\/localhost\/api\/admin\/admin-user\/list?page=1",
     "from": 1,
     "last_page": 1,
-    "last_page_url": "http:\/\/localhost\/api\/admin\/admin-user\/list?page=1",
-    "next_page_url": null,
-    "path": "http:\/\/localhost\/api\/admin\/admin-user\/list",
     "per_page": 20,
-    "prev_page_url": null,
     "to": 3,
     "total": 3
 }
@@ -93,4 +98,6 @@ to | int | 本頁到第 n 筆結束
     code | description | data content
     ---- | --- | ---
     1 | 必要參數 | ```  ["branch_id"] ```
-    2 | 登入失敗 |  
+    2 | 登入失敗 |
+    
+1. ## 翻譯

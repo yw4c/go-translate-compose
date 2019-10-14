@@ -1,4 +1,9 @@
-
+## Deploy
+### migration
+````
+./cmd/artisan migrate up
+./cmd/artisan migrate down
+````
 
 ## Used Packages
 Item  | package

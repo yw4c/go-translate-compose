@@ -9,13 +9,19 @@ git submodule ...
 name  | description
 ---- | --- 
 p005api |  restful api 
-p010user | 用戶服務
+p010user | User 用戶
+p011trans | Translation 翻譯
+p012dict | Dictionary 字典
+p013keep | Keep 單字卡
+p014google-svc | Google Cloud Service
+p015oxford-svc | Oxford Service
+p016detect-lang-com | detect-lang.com Service
 
 ## ports
 port  | description
 ---- | --- 
 6001-6999 | GRPC testing 
-80 | p005api
+81 | p005api
 8080 | Adminer - mysql cli
 8081 | Kibana - ES UI
 8500 | Consul UI

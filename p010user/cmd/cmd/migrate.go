@@ -27,7 +27,7 @@ import (
 var migrateCmd = &cobra.Command{
 	Use:   "migrate",
 	Short: "database migration",
-
+	Long: "Args: \n up : migrate new migrations. \n down : rollback 1 step",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		m:= migration.New(&db.LocalConn{})
