@@ -3,23 +3,37 @@ syntax = "proto3";
 package v1;
 
 service User {
-    // Sends a greeting
+    rpc register (RegisterRequest) returns (RegisterReply) {}
     rpc login (LoginRequest) returns (LoginReply) {}
-}
-
-// The request message containing the user's name.
-message LoginRequest {
-    string username = 1;
-    string password = 2;
-}
-
-// The response message containing the greetings
-message LoginReply {
-    string Token = 1;
-    Error Error =2;
 }
 
 message Error {
     int32 code = 1;
     string message = 2;
 }
+
+///////// Register //////////
+
+message RegisterRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message RegisterReply {
+    Error Error=1;
+}
+
+///////// Login //////////
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginReply {
+    string Token = 1;
+    Error Error =2;
+}
+
+
+
