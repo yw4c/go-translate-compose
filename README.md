@@ -1,7 +1,9 @@
 ## Running Project
-### 1. Load sub-modules 
+### 
 ````
-git submodule ...
+git submodule update --init --recursive
+cp .env.example .env
+docker-compose up --build
 ````
 
 
@@ -17,7 +19,7 @@ p014google-svc | Google Cloud Service
 p015oxford-svc | Oxford Service
 p016detect-lang-com | detect-lang.com Service
 
-## ports
+## Occupied ports
 port  | description
 ---- | --- 
 6001-6999 | GRPC testing 
