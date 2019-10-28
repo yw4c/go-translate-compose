@@ -71,6 +71,101 @@ func (m *Error) GetMessage() string {
 	return ""
 }
 
+type UserData struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	Username             string   `protobuf:"bytes,2,opt,name=Username,proto3" json:"Username,omitempty"`
+	Email                string   `protobuf:"bytes,3,opt,name=Email,proto3" json:"Email,omitempty"`
+	CreatedAt            int64    `protobuf:"varint,4,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
+	UpdatedAt            int64    `protobuf:"varint,5,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
+	Oauth                string   `protobuf:"bytes,6,opt,name=Oauth,proto3" json:"Oauth,omitempty"`
+	NativeLang           string   `protobuf:"bytes,7,opt,name=NativeLang,proto3" json:"NativeLang,omitempty"`
+	IsValidated          bool     `protobuf:"varint,8,opt,name=IsValidated,proto3" json:"IsValidated,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UserData) Reset()         { *m = UserData{} }
+func (m *UserData) String() string { return proto.CompactTextString(m) }
+func (*UserData) ProtoMessage()    {}
+func (*UserData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{1}
+}
+
+func (m *UserData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UserData.Unmarshal(m, b)
+}
+func (m *UserData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UserData.Marshal(b, m, deterministic)
+}
+func (m *UserData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserData.Merge(m, src)
+}
+func (m *UserData) XXX_Size() int {
+	return xxx_messageInfo_UserData.Size(m)
+}
+func (m *UserData) XXX_DiscardUnknown() {
+	xxx_messageInfo_UserData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UserData proto.InternalMessageInfo
+
+func (m *UserData) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *UserData) GetUsername() string {
+	if m != nil {
+		return m.Username
+	}
+	return ""
+}
+
+func (m *UserData) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *UserData) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *UserData) GetUpdatedAt() int64 {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return 0
+}
+
+func (m *UserData) GetOauth() string {
+	if m != nil {
+		return m.Oauth
+	}
+	return ""
+}
+
+func (m *UserData) GetNativeLang() string {
+	if m != nil {
+		return m.NativeLang
+	}
+	return ""
+}
+
+func (m *UserData) GetIsValidated() bool {
+	if m != nil {
+		return m.IsValidated
+	}
+	return false
+}
+
 type RegisterRequest struct {
 	Username             string   `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	Password             string   `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -83,7 +178,7 @@ func (m *RegisterRequest) Reset()         { *m = RegisterRequest{} }
 func (m *RegisterRequest) String() string { return proto.CompactTextString(m) }
 func (*RegisterRequest) ProtoMessage()    {}
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_116e343673f7ffaf, []int{1}
+	return fileDescriptor_116e343673f7ffaf, []int{2}
 }
 
 func (m *RegisterRequest) XXX_Unmarshal(b []byte) error {
@@ -129,7 +224,7 @@ func (m *RegisterReply) Reset()         { *m = RegisterReply{} }
 func (m *RegisterReply) String() string { return proto.CompactTextString(m) }
 func (*RegisterReply) ProtoMessage()    {}
 func (*RegisterReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_116e343673f7ffaf, []int{2}
+	return fileDescriptor_116e343673f7ffaf, []int{3}
 }
 
 func (m *RegisterReply) XXX_Unmarshal(b []byte) error {
@@ -157,6 +252,101 @@ func (m *RegisterReply) GetError() *Error {
 	return nil
 }
 
+///////// Register Validation //////////
+type RegisterValidationRequest struct {
+	Otp                  string   `protobuf:"bytes,1,opt,name=otp,proto3" json:"otp,omitempty"`
+	Username             string   `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RegisterValidationRequest) Reset()         { *m = RegisterValidationRequest{} }
+func (m *RegisterValidationRequest) String() string { return proto.CompactTextString(m) }
+func (*RegisterValidationRequest) ProtoMessage()    {}
+func (*RegisterValidationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{4}
+}
+
+func (m *RegisterValidationRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RegisterValidationRequest.Unmarshal(m, b)
+}
+func (m *RegisterValidationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RegisterValidationRequest.Marshal(b, m, deterministic)
+}
+func (m *RegisterValidationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RegisterValidationRequest.Merge(m, src)
+}
+func (m *RegisterValidationRequest) XXX_Size() int {
+	return xxx_messageInfo_RegisterValidationRequest.Size(m)
+}
+func (m *RegisterValidationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_RegisterValidationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RegisterValidationRequest proto.InternalMessageInfo
+
+func (m *RegisterValidationRequest) GetOtp() string {
+	if m != nil {
+		return m.Otp
+	}
+	return ""
+}
+
+func (m *RegisterValidationRequest) GetUsername() string {
+	if m != nil {
+		return m.Username
+	}
+	return ""
+}
+
+type RegisterValidationReply struct {
+	Token                string   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Error                *Error   `protobuf:"bytes,2,opt,name=Error,proto3" json:"Error,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RegisterValidationReply) Reset()         { *m = RegisterValidationReply{} }
+func (m *RegisterValidationReply) String() string { return proto.CompactTextString(m) }
+func (*RegisterValidationReply) ProtoMessage()    {}
+func (*RegisterValidationReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{5}
+}
+
+func (m *RegisterValidationReply) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RegisterValidationReply.Unmarshal(m, b)
+}
+func (m *RegisterValidationReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RegisterValidationReply.Marshal(b, m, deterministic)
+}
+func (m *RegisterValidationReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RegisterValidationReply.Merge(m, src)
+}
+func (m *RegisterValidationReply) XXX_Size() int {
+	return xxx_messageInfo_RegisterValidationReply.Size(m)
+}
+func (m *RegisterValidationReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_RegisterValidationReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RegisterValidationReply proto.InternalMessageInfo
+
+func (m *RegisterValidationReply) GetToken() string {
+	if m != nil {
+		return m.Token
+	}
+	return ""
+}
+
+func (m *RegisterValidationReply) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
 type LoginRequest struct {
 	Username             string   `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	Password             string   `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -169,7 +359,7 @@ func (m *LoginRequest) Reset()         { *m = LoginRequest{} }
 func (m *LoginRequest) String() string { return proto.CompactTextString(m) }
 func (*LoginRequest) ProtoMessage()    {}
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_116e343673f7ffaf, []int{3}
+	return fileDescriptor_116e343673f7ffaf, []int{6}
 }
 
 func (m *LoginRequest) XXX_Unmarshal(b []byte) error {
@@ -216,7 +406,7 @@ func (m *LoginReply) Reset()         { *m = LoginReply{} }
 func (m *LoginReply) String() string { return proto.CompactTextString(m) }
 func (*LoginReply) ProtoMessage()    {}
 func (*LoginReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_116e343673f7ffaf, []int{4}
+	return fileDescriptor_116e343673f7ffaf, []int{7}
 }
 
 func (m *LoginReply) XXX_Unmarshal(b []byte) error {
@@ -251,34 +441,241 @@ func (m *LoginReply) GetError() *Error {
 	return nil
 }
 
+///////// Auth Validation //////////
+type AuthValidationRequest struct {
+	Token                string   `protobuf:"bytes,1,opt,name=Token,proto3" json:"Token,omitempty"`
+	AuthType             string   `protobuf:"bytes,2,opt,name=AuthType,proto3" json:"AuthType,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AuthValidationRequest) Reset()         { *m = AuthValidationRequest{} }
+func (m *AuthValidationRequest) String() string { return proto.CompactTextString(m) }
+func (*AuthValidationRequest) ProtoMessage()    {}
+func (*AuthValidationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{8}
+}
+
+func (m *AuthValidationRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AuthValidationRequest.Unmarshal(m, b)
+}
+func (m *AuthValidationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AuthValidationRequest.Marshal(b, m, deterministic)
+}
+func (m *AuthValidationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AuthValidationRequest.Merge(m, src)
+}
+func (m *AuthValidationRequest) XXX_Size() int {
+	return xxx_messageInfo_AuthValidationRequest.Size(m)
+}
+func (m *AuthValidationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AuthValidationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AuthValidationRequest proto.InternalMessageInfo
+
+func (m *AuthValidationRequest) GetToken() string {
+	if m != nil {
+		return m.Token
+	}
+	return ""
+}
+
+func (m *AuthValidationRequest) GetAuthType() string {
+	if m != nil {
+		return m.AuthType
+	}
+	return ""
+}
+
+type AuthValidationReply struct {
+	User                 *UserData `protobuf:"bytes,1,opt,name=User,proto3" json:"User,omitempty"`
+	Error                *Error    `protobuf:"bytes,2,opt,name=Error,proto3" json:"Error,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *AuthValidationReply) Reset()         { *m = AuthValidationReply{} }
+func (m *AuthValidationReply) String() string { return proto.CompactTextString(m) }
+func (*AuthValidationReply) ProtoMessage()    {}
+func (*AuthValidationReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{9}
+}
+
+func (m *AuthValidationReply) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AuthValidationReply.Unmarshal(m, b)
+}
+func (m *AuthValidationReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AuthValidationReply.Marshal(b, m, deterministic)
+}
+func (m *AuthValidationReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AuthValidationReply.Merge(m, src)
+}
+func (m *AuthValidationReply) XXX_Size() int {
+	return xxx_messageInfo_AuthValidationReply.Size(m)
+}
+func (m *AuthValidationReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_AuthValidationReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AuthValidationReply proto.InternalMessageInfo
+
+func (m *AuthValidationReply) GetUser() *UserData {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+func (m *AuthValidationReply) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
+///////// UpdateUser //////////
+type SetNativeLangRequest struct {
+	UserId               int32    `protobuf:"varint,1,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	NativeLang           string   `protobuf:"bytes,2,opt,name=NativeLang,proto3" json:"NativeLang,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetNativeLangRequest) Reset()         { *m = SetNativeLangRequest{} }
+func (m *SetNativeLangRequest) String() string { return proto.CompactTextString(m) }
+func (*SetNativeLangRequest) ProtoMessage()    {}
+func (*SetNativeLangRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{10}
+}
+
+func (m *SetNativeLangRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SetNativeLangRequest.Unmarshal(m, b)
+}
+func (m *SetNativeLangRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SetNativeLangRequest.Marshal(b, m, deterministic)
+}
+func (m *SetNativeLangRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetNativeLangRequest.Merge(m, src)
+}
+func (m *SetNativeLangRequest) XXX_Size() int {
+	return xxx_messageInfo_SetNativeLangRequest.Size(m)
+}
+func (m *SetNativeLangRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetNativeLangRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetNativeLangRequest proto.InternalMessageInfo
+
+func (m *SetNativeLangRequest) GetUserId() int32 {
+	if m != nil {
+		return m.UserId
+	}
+	return 0
+}
+
+func (m *SetNativeLangRequest) GetNativeLang() string {
+	if m != nil {
+		return m.NativeLang
+	}
+	return ""
+}
+
+type SetNativeLangResponse struct {
+	Error                *Error   `protobuf:"bytes,2,opt,name=Error,proto3" json:"Error,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetNativeLangResponse) Reset()         { *m = SetNativeLangResponse{} }
+func (m *SetNativeLangResponse) String() string { return proto.CompactTextString(m) }
+func (*SetNativeLangResponse) ProtoMessage()    {}
+func (*SetNativeLangResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_116e343673f7ffaf, []int{11}
+}
+
+func (m *SetNativeLangResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SetNativeLangResponse.Unmarshal(m, b)
+}
+func (m *SetNativeLangResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SetNativeLangResponse.Marshal(b, m, deterministic)
+}
+func (m *SetNativeLangResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetNativeLangResponse.Merge(m, src)
+}
+func (m *SetNativeLangResponse) XXX_Size() int {
+	return xxx_messageInfo_SetNativeLangResponse.Size(m)
+}
+func (m *SetNativeLangResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetNativeLangResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetNativeLangResponse proto.InternalMessageInfo
+
+func (m *SetNativeLangResponse) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Error)(nil), "v1.Error")
+	proto.RegisterType((*UserData)(nil), "v1.UserData")
 	proto.RegisterType((*RegisterRequest)(nil), "v1.RegisterRequest")
 	proto.RegisterType((*RegisterReply)(nil), "v1.RegisterReply")
+	proto.RegisterType((*RegisterValidationRequest)(nil), "v1.RegisterValidationRequest")
+	proto.RegisterType((*RegisterValidationReply)(nil), "v1.RegisterValidationReply")
 	proto.RegisterType((*LoginRequest)(nil), "v1.LoginRequest")
 	proto.RegisterType((*LoginReply)(nil), "v1.LoginReply")
+	proto.RegisterType((*AuthValidationRequest)(nil), "v1.AuthValidationRequest")
+	proto.RegisterType((*AuthValidationReply)(nil), "v1.AuthValidationReply")
+	proto.RegisterType((*SetNativeLangRequest)(nil), "v1.SetNativeLangRequest")
+	proto.RegisterType((*SetNativeLangResponse)(nil), "v1.SetNativeLangResponse")
 }
 
 func init() { proto.RegisterFile("user.proto", fileDescriptor_116e343673f7ffaf) }
 
 var fileDescriptor_116e343673f7ffaf = []byte{
-	// 250 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x91, 0xcf, 0x4a, 0xc3, 0x40,
-	0x10, 0xc6, 0x4d, 0x68, 0xb4, 0x19, 0xff, 0x8f, 0x1e, 0x42, 0x2e, 0x96, 0x3d, 0x15, 0x84, 0x60,
-	0xab, 0x3e, 0x81, 0x28, 0x08, 0x9e, 0x16, 0x7d, 0x80, 0x68, 0x87, 0x10, 0x4c, 0xb3, 0xeb, 0x4c,
-	0x5a, 0xe9, 0xdb, 0xcb, 0x6e, 0xd6, 0xb6, 0x8a, 0x37, 0x6f, 0xfb, 0x7d, 0x33, 0xfc, 0xe6, 0x9b,
-	0x1d, 0x80, 0x85, 0x10, 0x17, 0x96, 0x4d, 0x67, 0x30, 0x5e, 0x4e, 0xd4, 0x2d, 0x24, 0xf7, 0xcc,
-	0x86, 0x11, 0x61, 0xf0, 0x66, 0x66, 0x94, 0x45, 0xa3, 0x68, 0x9c, 0x68, 0xff, 0xc6, 0x0c, 0xf6,
-	0xe6, 0x24, 0x52, 0x56, 0x94, 0xc5, 0xa3, 0x68, 0x9c, 0xea, 0x6f, 0xa9, 0x1e, 0xe1, 0x58, 0x53,
-	0x55, 0x4b, 0x47, 0xac, 0xe9, 0x63, 0x41, 0xd2, 0x61, 0x0e, 0x43, 0xc7, 0x6e, 0xcb, 0x79, 0x0f,
-	0x49, 0xf5, 0x5a, 0xbb, 0x9a, 0x2d, 0x45, 0x3e, 0x0d, 0xcf, 0x02, 0x69, 0xad, 0xd5, 0x15, 0x1c,
-	0x6e, 0x50, 0xb6, 0x59, 0xe1, 0x45, 0x88, 0xe4, 0x29, 0xfb, 0xd3, 0xb4, 0x58, 0x4e, 0x0a, 0x6f,
-	0xe8, 0xde, 0x57, 0x0f, 0x70, 0xf0, 0x64, 0xaa, 0xba, 0xfd, 0xef, 0xe4, 0x3b, 0x80, 0xc0, 0x71,
-	0x63, 0xcf, 0x21, 0x79, 0x36, 0xef, 0xd4, 0x06, 0x44, 0x2f, 0x36, 0x61, 0xe2, 0xbf, 0xc3, 0x4c,
-	0x6b, 0x18, 0xbc, 0x08, 0x31, 0xde, 0xc0, 0x90, 0xc3, 0x1a, 0x78, 0xe6, 0xba, 0x7e, 0xfd, 0x4f,
-	0x7e, 0xfa, 0xd3, 0xb4, 0xcd, 0x4a, 0xed, 0xe0, 0x25, 0x24, 0x8d, 0x8b, 0x80, 0x27, 0xae, 0xba,
-	0xbd, 0x55, 0x7e, 0xb4, 0xe5, 0xf8, 0xe6, 0xd7, 0x5d, 0x7f, 0xb6, 0xeb, 0xaf, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0x27, 0x60, 0x59, 0xd3, 0xc4, 0x01, 0x00, 0x00,
+	// 539 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0x5d, 0x6f, 0xd3, 0x3c,
+	0x14, 0xc7, 0x97, 0xb4, 0xe9, 0xda, 0xb3, 0x3e, 0x7b, 0x8a, 0xd7, 0xb1, 0x34, 0xbc, 0x45, 0xbe,
+	0xaa, 0x84, 0x54, 0xb1, 0x01, 0x12, 0xb7, 0xd3, 0x36, 0xa4, 0x48, 0x63, 0x4c, 0xa1, 0x43, 0xdc,
+	0x1a, 0x62, 0x75, 0x11, 0x6d, 0x1c, 0x6c, 0xa7, 0xa8, 0xdf, 0x92, 0x8f, 0xc0, 0x47, 0x41, 0x8e,
+	0xed, 0x36, 0xcd, 0x32, 0x0d, 0x89, 0xbb, 0x9c, 0xf3, 0xb7, 0x7f, 0xfa, 0x9f, 0x17, 0x07, 0xa0,
+	0x10, 0x94, 0x4f, 0x72, 0xce, 0x24, 0x43, 0xee, 0xf2, 0x18, 0xbf, 0x05, 0xef, 0x82, 0x73, 0xc6,
+	0x11, 0x82, 0xf6, 0x37, 0x96, 0x50, 0xdf, 0x09, 0x9d, 0xb1, 0x17, 0x97, 0xdf, 0xc8, 0x87, 0xdd,
+	0x05, 0x15, 0x82, 0xcc, 0xa8, 0xef, 0x86, 0xce, 0xb8, 0x17, 0xdb, 0x10, 0xff, 0x76, 0xa0, 0x7b,
+	0x23, 0x28, 0x3f, 0x27, 0x92, 0xa0, 0x7d, 0x70, 0xa3, 0xc4, 0x5c, 0x74, 0xa3, 0x04, 0x05, 0x5a,
+	0xcb, 0xc8, 0xc2, 0xde, 0x5b, 0xc7, 0x68, 0x08, 0xde, 0xc5, 0x82, 0xa4, 0x73, 0xbf, 0x55, 0x0a,
+	0x3a, 0x40, 0x4f, 0xa1, 0x77, 0xc6, 0x29, 0x91, 0x34, 0x39, 0x95, 0x7e, 0x3b, 0x74, 0xc6, 0xad,
+	0x78, 0x93, 0x50, 0xea, 0x4d, 0x9e, 0x18, 0xd5, 0xd3, 0xea, 0x3a, 0xa1, 0x88, 0x1f, 0x49, 0x21,
+	0x6f, 0xfd, 0x8e, 0x26, 0x96, 0x01, 0x7a, 0x0e, 0x70, 0x45, 0x64, 0xba, 0xa4, 0x97, 0x24, 0x9b,
+	0xf9, 0xbb, 0xa5, 0x54, 0xc9, 0xa0, 0x10, 0xf6, 0x22, 0xf1, 0x99, 0xcc, 0xd3, 0x12, 0xe3, 0x77,
+	0x43, 0x67, 0xdc, 0x8d, 0xab, 0x29, 0x1c, 0xc1, 0xff, 0x31, 0x9d, 0xa5, 0x42, 0x52, 0x1e, 0xd3,
+	0x1f, 0x05, 0x15, 0x52, 0x15, 0x56, 0xd8, 0xc2, 0x1c, 0x5d, 0x98, 0x8d, 0x95, 0x96, 0x13, 0x21,
+	0x7e, 0x32, 0x9e, 0xd8, 0xa2, 0x6d, 0x8c, 0x5f, 0xc1, 0x7f, 0x1b, 0x54, 0x3e, 0x5f, 0xa1, 0x17,
+	0xa6, 0xeb, 0x25, 0x65, 0xef, 0xa4, 0x37, 0x59, 0x1e, 0x4f, 0xca, 0x44, 0xac, 0xf3, 0x38, 0x82,
+	0x91, 0xbd, 0x61, 0x1c, 0xa5, 0x2c, 0xb3, 0x36, 0x06, 0xd0, 0x62, 0x32, 0x37, 0x0e, 0xd4, 0xe7,
+	0x96, 0x31, 0x77, 0xdb, 0x18, 0xbe, 0x86, 0xa3, 0x26, 0x94, 0xb2, 0x31, 0x04, 0x4f, 0xb2, 0xef,
+	0x34, 0x33, 0x28, 0x1d, 0x6c, 0xcc, 0xb9, 0xf7, 0x98, 0x7b, 0x0f, 0xfd, 0x4b, 0x36, 0x4b, 0xb3,
+	0x7f, 0x6d, 0xcb, 0x19, 0x80, 0xe1, 0x18, 0x33, 0xd3, 0xaa, 0x99, 0xe9, 0xdf, 0x99, 0x89, 0xe0,
+	0xf0, 0xb4, 0x90, 0xb7, 0x77, 0xbb, 0xd4, 0xcc, 0x0b, 0xa0, 0xab, 0x8e, 0x4f, 0x57, 0xf9, 0xba,
+	0x53, 0x36, 0xc6, 0x5f, 0xe0, 0xa0, 0x8e, 0x52, 0xc6, 0x42, 0x68, 0xab, 0xf5, 0x35, 0xb3, 0xea,
+	0x2b, 0x07, 0x76, 0xf5, 0xe3, 0x52, 0x79, 0xd8, 0xe4, 0x15, 0x0c, 0x3f, 0x51, 0xb9, 0x59, 0x3f,
+	0xeb, 0xf1, 0x31, 0x74, 0x14, 0x60, 0xfd, 0x7a, 0x4c, 0x54, 0xdb, 0x5e, 0xb7, 0xbe, 0xbd, 0xf8,
+	0x1d, 0x1c, 0xd6, 0x78, 0x22, 0x67, 0x99, 0xa0, 0x0f, 0x3a, 0x39, 0xf9, 0xe5, 0xea, 0x6a, 0xd0,
+	0x1b, 0xe8, 0x72, 0xb3, 0x16, 0xe8, 0x40, 0x1d, 0xab, 0x2d, 0x7b, 0xf0, 0x68, 0x3b, 0x99, 0xcf,
+	0x57, 0x78, 0x07, 0xbd, 0x04, 0x6f, 0xae, 0x46, 0x86, 0x06, 0x4a, 0xad, 0x6e, 0x41, 0xb0, 0x5f,
+	0xc9, 0xe8, 0xc3, 0xd7, 0x30, 0x58, 0x9a, 0xe7, 0x64, 0x39, 0xe8, 0x59, 0x95, 0x7a, 0x67, 0x68,
+	0xc1, 0x93, 0xfb, 0x64, 0x4d, 0x3c, 0x87, 0xbe, 0x25, 0xaa, 0x49, 0xa1, 0x91, 0x3a, 0xde, 0x38,
+	0xfe, 0xe0, 0xa8, 0x49, 0xd2, 0x94, 0x0f, 0x30, 0x14, 0x4d, 0xd3, 0xf0, 0xd5, 0x95, 0xa6, 0x39,
+	0x05, 0xa3, 0x06, 0x45, 0x77, 0x1c, 0xef, 0x7c, 0xed, 0x94, 0x7f, 0xd3, 0xd7, 0x7f, 0x02, 0x00,
+	0x00, 0xff, 0xff, 0xf2, 0x05, 0xc3, 0x5c, 0x5b, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -295,6 +692,9 @@ const _ = grpc.SupportPackageIsVersion4
 type UserClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterReply, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
+	ValidateRegister(ctx context.Context, in *RegisterValidationRequest, opts ...grpc.CallOption) (*RegisterValidationReply, error)
+	ValidateAuth(ctx context.Context, in *AuthValidationRequest, opts ...grpc.CallOption) (*AuthValidationReply, error)
+	SetNativeLangRequest(ctx context.Context, in *SetNativeLangRequest, opts ...grpc.CallOption) (*SetNativeLangResponse, error)
 }
 
 type userClient struct {
@@ -323,10 +723,40 @@ func (c *userClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 	return out, nil
 }
 
+func (c *userClient) ValidateRegister(ctx context.Context, in *RegisterValidationRequest, opts ...grpc.CallOption) (*RegisterValidationReply, error) {
+	out := new(RegisterValidationReply)
+	err := c.cc.Invoke(ctx, "/v1.User/validateRegister", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ValidateAuth(ctx context.Context, in *AuthValidationRequest, opts ...grpc.CallOption) (*AuthValidationReply, error) {
+	out := new(AuthValidationReply)
+	err := c.cc.Invoke(ctx, "/v1.User/validateAuth", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetNativeLangRequest(ctx context.Context, in *SetNativeLangRequest, opts ...grpc.CallOption) (*SetNativeLangResponse, error) {
+	out := new(SetNativeLangResponse)
+	err := c.cc.Invoke(ctx, "/v1.User/setNativeLangRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 type UserServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterReply, error)
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
+	ValidateRegister(context.Context, *RegisterValidationRequest) (*RegisterValidationReply, error)
+	ValidateAuth(context.Context, *AuthValidationRequest) (*AuthValidationReply, error)
+	SetNativeLangRequest(context.Context, *SetNativeLangRequest) (*SetNativeLangResponse, error)
 }
 
 // UnimplementedUserServer can be embedded to have forward compatible implementations.
@@ -338,6 +768,15 @@ func (*UnimplementedUserServer) Register(ctx context.Context, req *RegisterReque
 }
 func (*UnimplementedUserServer) Login(ctx context.Context, req *LoginRequest) (*LoginReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedUserServer) ValidateRegister(ctx context.Context, req *RegisterValidationRequest) (*RegisterValidationReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateRegister not implemented")
+}
+func (*UnimplementedUserServer) ValidateAuth(ctx context.Context, req *AuthValidationRequest) (*AuthValidationReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateAuth not implemented")
+}
+func (*UnimplementedUserServer) SetNativeLangRequest(ctx context.Context, req *SetNativeLangRequest) (*SetNativeLangResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetNativeLangRequest not implemented")
 }
 
 func RegisterUserServer(s *grpc.Server, srv UserServer) {
@@ -380,6 +819,60 @@ func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ValidateRegister_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterValidationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ValidateRegister(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.User/ValidateRegister",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ValidateRegister(ctx, req.(*RegisterValidationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ValidateAuth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthValidationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ValidateAuth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.User/ValidateAuth",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ValidateAuth(ctx, req.(*AuthValidationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetNativeLangRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNativeLangRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetNativeLangRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.User/SetNativeLangRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetNativeLangRequest(ctx, req.(*SetNativeLangRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _User_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.User",
 	HandlerType: (*UserServer)(nil),
@@ -391,6 +884,18 @@ var _User_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "login",
 			Handler:    _User_Login_Handler,
+		},
+		{
+			MethodName: "validateRegister",
+			Handler:    _User_ValidateRegister_Handler,
+		},
+		{
+			MethodName: "validateAuth",
+			Handler:    _User_ValidateAuth_Handler,
+		},
+		{
+			MethodName: "setNativeLangRequest",
+			Handler:    _User_SetNativeLangRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
