@@ -1,7 +1,18 @@
 ## Running Project
-### 
+### Set up local env var for development
+````
+export GO111MODULE=on
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
+````
+
+### recover sub-projects
 ````
 git submodule update --init --recursive
+````
+
+### run docker
+````
 cp .env.example .env
 docker-compose up --build
 ````
@@ -12,12 +23,9 @@ name  | description
 ---- | --- 
 p005api |  restful api 
 p010user | User 用戶
-p011trans | Translation 翻譯
 p012dict | Dictionary 字典
 p013keep | Keep 單字卡
-p014google-svc | Google Cloud Service
-p015oxford-svc | Oxford Service
-p016detect-lang-com | detect-lang.com Service
+
 
 ## Occupied ports
 port  | description
@@ -36,8 +44,7 @@ port  | description
 ### Protobuf
 ###  生成 pb 
 ````
-# ./pb
-protoc --go_out=plugins=grpc:. *.proto
+sh ./pb/gen.sh
 ````
 
 ### 同步 pb 庫

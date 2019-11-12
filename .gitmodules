@@ -4,3 +4,9 @@
 [submodule "p005api"]
 	path = p005api
 	url = git@github.com:yw4c/trans-p005api.git
+[submodule "p012dict"]
+	path = p012dict
+	url = git@github.com:yw4c/trans-p012dict.git
+[submodule "pb/github.com/yw4c/trans-pb"]
+	path = pb/github.com/yw4c/trans-pb
+	url = git@github.com:yw4c/trans-pb.git

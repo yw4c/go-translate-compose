@@ -137,7 +137,6 @@ services:
     - 81:81
     volumes:
     - ./p005api:/go/src/app
-    - ./pb:/go/src/pb
     command: >
       sh -c "
         go run src/main.go
@@ -154,7 +153,6 @@ services:
       - 6010:6000
     volumes:
       - ./p010user:/go/src/app
-      - ./pb:/go/src/app/src/pb
     command: >
       sh -c "
         go run src/main.go
@@ -162,7 +160,21 @@ services:
     networks:
       - backend
 
-
+  p012dict:
+    build:
+      context: ./p012dict
+      args:
+        work_path: /go/src/app
+    ports:
+      - 6012:6000
+    volumes:
+      - ./p012dict:/go/src/app
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+      - backend
 
 
 

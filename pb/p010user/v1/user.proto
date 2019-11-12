@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-package v1;
+package user;
+option go_package = "github.com/yw4c/trans-pb/p010user/v1";
 
 service User {
     rpc register (RegisterRequest) returns (RegisterReply) {}
