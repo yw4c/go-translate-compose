@@ -10,3 +10,6 @@
 [submodule "pb/github.com/yw4c/trans-pb"]
 	path = pb/github.com/yw4c/trans-pb
 	url = git@github.com:yw4c/trans-pb.git
+[submodule "p013keep"]
+	path = p013keep
+	url = git@github.com:yw4c/trans-p013keep.git

@@ -176,7 +176,21 @@ services:
     networks:
       - backend
 
-
+  p013keep:
+    build:
+      context: ./p013keep
+      args:
+        work_path: /go/src/app
+    ports:
+      - 6013:6000
+    volumes:
+      - ./p013keep:/go/src/app
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+      - backend
 
 networks:
   backend:
