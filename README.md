@@ -1,5 +1,5 @@
-## Running Project
-### Set up local env var for development
+# Running with docker-compose
+### Set up local env variable
 ````
 export GO111MODULE=on
 export GOPATH=$HOME/go
@@ -16,6 +16,8 @@ git submodule update --init --recursive
 cp .env.example .env
 docker-compose up --build
 ````
+
+## Running with kubernetes
 
 
 ## Services
@@ -41,16 +43,9 @@ port  | description
 
 
 
-### Protobuf
+## Protobuf
 ###  生成 pb 
 ````
 sh ./pb/gen.sh
 ````
 
-### 同步 pb 庫
-* docker 運行使用 volume 同步
-* 本地 coding 使用連結
-````
-# e.g. in ./p010user/src
-ln -s ../../pb ./
-````

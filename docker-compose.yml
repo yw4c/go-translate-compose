@@ -131,16 +131,10 @@ services:
   p005api:
     build:
       context: ./p005api
-      args:
-        work_path: /go/src/app
     ports:
     - 81:81
     volumes:
     - ./p005api:/go/src/app
-    command: >
-      sh -c "
-        go run src/main.go
-      "
     networks:
     - backend  
 
@@ -153,44 +147,40 @@ services:
       - 6010:6000
     volumes:
       - ./p010user:/go/src/app
-    command: >
-      sh -c "
-        go run src/main.go
-      "
     networks:
       - backend
-
-  p012dict:
-    build:
-      context: ./p012dict
-      args:
-        work_path: /go/src/app
-    ports:
-      - 6012:6000
-    volumes:
-      - ./p012dict:/go/src/app
-    command: >
-      sh -c "
-        go run src/main.go
-      "
-    networks:
-      - backend
-
-  p013keep:
-    build:
-      context: ./p013keep
-      args:
-        work_path: /go/src/app
-    ports:
-      - 6013:6000
-    volumes:
-      - ./p013keep:/go/src/app
-    command: >
-      sh -c "
-        go run src/main.go
-      "
-    networks:
-      - backend
+#
+#  p012dict:
+#    build:
+#      context: ./p012dict
+#      args:
+#        work_path: /go/src/app
+#    ports:
+#      - 6012:6000
+#    volumes:
+#      - ./p012dict:/go/src/app
+#    command: >
+#      sh -c "
+#        go run src/main.go
+#      "
+#    networks:
+#      - backend
+#
+#  p013keep:
+#    build:
+#      context: ./p013keep
+#      args:
+#        work_path: /go/src/app
+#    ports:
+#      - 6013:6000
+#    volumes:
+#      - ./p013keep:/go/src/app
+#    command: >
+#      sh -c "
+#        go run src/main.go
+#      "
+#    networks:
+#      - backend
 
 networks:
   backend:
