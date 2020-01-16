@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p005api" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p005api/src/pb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p006amqp" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p010user" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p012dict" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p013keep" vcs="Git" />

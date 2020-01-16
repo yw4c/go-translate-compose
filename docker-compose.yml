@@ -1,9 +1,7 @@
 version: "3"
 services:
 
-###################################### Database ########################################
-########################################################################################
-
+### mysql ########################################
   mysql:
     build:
       context: ./mysql
@@ -22,7 +20,7 @@ services:
     networks:
     - backend
 
-  ### Adminer ###########################################
+### Adminer ###########################################
   adminer:
     image: adminer
     ports:
@@ -30,99 +28,22 @@ services:
     networks:
       - backend
 
-
-###################################### Consul ##########################################
-########################################################################################
-
-#  # consul server
-#  consul001:
-#    image: consul
-#    command: >
-#      sh -c "
-#        consul agent -server -data-dir /tmp/node1 -node=consul001  -bootstrap-expect=1  -bind=0.0.0.0 -client=0.0.0.0 -ui
-#      "
-#    ports:
-#    - 8500:8500
-#    networks:
-#    - backend
-#
-#
-#  # consul client
-#  consul002:
-#    image: consul
-#    depends_on:
-#    - consul001
-#    command: >
-#      sh -c "
-#        consul agent \
-#        -data-dir /tmp/node2 \
-#        -node=consul002 \
-#        -retry-join=consul001 \
-#        -bind=0.0.0.0 \
-#        -client=0.0.0.0 \
-#        -config-dir /consul/config/ \
-#        -enable-local-script-checks
-#      "
-#    volumes:
-#    - ./consul/config:/consul/config
-#    networks:
-#    - backend
-
-
-################################## Log ELK@6.5.2 ########################################
-########################################################################################
-
-#  # 收集
-#  filebeat:
-#    hostname: filebeat
-#    image: weschen/filebeat
-#    build:
-#      context: filebeat
-#      dockerfile: Dockerfile
-#    volumes:
-#    # needed to access all docker logs (read only) :
-#    - /var/lib/docker/containers:/usr/share/dockerlogs/data:ro
-#    # needed to access additional informations about containers
-#    - /var/run/docker.sock:/var/run/docker.sock
-#    - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-#    links:
-#    - elasticsearch
-#    networks:
-#    - backend
-#
-#
-#  # 儲存, 檢索
-#  elasticsearch:
-#    hostname: elasticsearch
-#    image: weschen/elasticsearch
-#    build:
-#      context: elasticsearch
-#      dockerfile: Dockerfile
-#    environment:
-#    - cluster.name=docker-elk-cluster
-#    - bootstrap.memory_lock=true
-#    - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    ports:
-#    - 9200:9200
-#    networks:
-#    - backend
-#
-#
-#  # UI
-#  kibana:
-#    image: docker.elastic.co/kibana/kibana:6.5.2
-#    environment:
-#    - "LOGGING_QUIET=true"
-#    links:
-#    - elasticsearch
-#    ports:
-#    - 8081:5601
-#    networks:
-#    - backend
+### RabbitMQ #############################################
+  rabbitmq:
+    build: ./rabbitmq
+    ports:
+      - "${RABBITMQ_NODE_HOST_PORT}:5672"
+      - "${RABBITMQ_MANAGEMENT_HTTP_HOST_PORT}:15672"
+      - "${RABBITMQ_MANAGEMENT_HTTPS_HOST_PORT}:15671"
+    privileged: true
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    hostname: laradock-rabbitmq
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - backend
 
 
 ###################################### Services ########################################
@@ -144,50 +65,50 @@ services:
       args:
         work_path: /go/src/app
     ports:
-      - 6010:6000
+      - 6010:6010
     volumes:
       - ./p010user:/go/src/app
     networks:
       - backend
-#
-#  p012dict:
-#    build:
-#      context: ./p012dict
-#      args:
-#        work_path: /go/src/app
-#    ports:
-#      - 6012:6000
-#    volumes:
-#      - ./p012dict:/go/src/app
-#    command: >
-#      sh -c "
-#        go run src/main.go
-#      "
-#    networks:
-#      - backend
-#
-#  p013keep:
-#    build:
-#      context: ./p013keep
-#      args:
-#        work_path: /go/src/app
-#    ports:
-#      - 6013:6000
-#    volumes:
-#      - ./p013keep:/go/src/app
-#    command: >
-#      sh -c "
-#        go run src/main.go
-#      "
-#    networks:
-#      - backend
+
+  p012dict:
+    build:
+      context: ./p012dict
+      args:
+        work_path: /go/src/app
+    ports:
+      - 6012:6012
+    volumes:
+      - ./p012dict:/go/src/app
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+      - backend
+
+  p013keep:
+    build:
+      context: ./p013keep
+      args:
+        work_path: /go/src/app
+    ports:
+      - 6013:6013
+    volumes:
+      - ./p013keep:/go/src/app
+    command: >
+      sh -c "
+        go run src/main.go
+      "
+    networks:
+      - backend
 
 networks:
   backend:
     driver: "bridge"
 
 volumes:
-  elasticsearch:
-    driver: local
   mysql:
+    driver: local
+  rabbitmq:
     driver: local
