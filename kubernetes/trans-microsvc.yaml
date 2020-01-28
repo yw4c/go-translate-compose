@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: trans-microsvc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: trans-microsvc
@@ -18,21 +18,21 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 81
-#        - name: p010user
-#          image: gcr.io/translate-1508946408545/p010user:latest
-#          imagePullPolicy: Always
-#          ports:
-#            - containerPort: 6010
-#        - name: p012dict
-#          image: gcr.io/translate-1508946408545/p012dict:latest
-#          imagePullPolicy: Always
-#          ports:
-#            - containerPort: 6012
-#        - name: p013keep
-#          image: gcr.io/translate-1508946408545/p013keep:latest
-#          imagePullPolicy: Always
-#          ports:
-#            - containerPort: 6013
+        - name: p010user
+          image: gcr.io/translate-1508946408545/p010user:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6010
+        - name: p012dict
+          image: gcr.io/translate-1508946408545/p012dict:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6012
+        - name: p013keep
+          image: gcr.io/translate-1508946408545/p013keep:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6013
 ---
 apiVersion: v1
 kind: Service

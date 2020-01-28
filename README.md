@@ -18,7 +18,7 @@ docker-compose up --build
 ````
 
 ### 4. Create database and user
-reference: ./mysql/docker-entrypoint-initdb.d/createdb.sql
+reference: ./mysql/docker-entrypoint-initdb.d/createdb.sql.example
 
 ## Directories
 name  | description 
@@ -30,5 +30,5 @@ p013keep | Keep service (單字卡)
 pb | protobuf of services
 kubernetes | k8s deployment sample for production
 mysql | used in docker-compose 
-rabbit | used in docker-compose
+rabbitmq | used in docker-compose
 
