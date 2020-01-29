@@ -10,6 +10,7 @@ export PATH="$PATH:$GOPATH/bin"
 ````
 git submodule update --init --recursive
 ````
+then set up env file of each service
 
 ### 3. Run Containers
 ````

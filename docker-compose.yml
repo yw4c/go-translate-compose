@@ -68,6 +68,8 @@ services:
       - 6010:6010
     volumes:
       - ./p010user:/go/src/app
+    depends_on:
+      - rabbitmq
     networks:
       - backend
 
