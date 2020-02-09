@@ -6,11 +6,15 @@ export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
 ````
 
-### 2. Recover sub-projects
-````
-git submodule update --init --recursive
-````
-then set up env file of each service
+### 2. Recover project
+1. Clone this repository into $GAPATH/src/
+1. Recover sub repositories
+    ````
+    git submodule update --init --recursive && \
+    git submodule foreach git pull origin master && \
+    git submodule foreach git checkout master
+    ````
+1. Set up env file of each service
 
 ### 3. Run Containers
 ````
@@ -19,7 +23,10 @@ docker-compose up --build
 ````
 
 ### 4. Create database and user
-reference: ./mysql/docker-entrypoint-initdb.d/createdb.sql.example
+reference:
+```` 
+./mysql/docker-entrypoint-initdb.d/createdb.sql.example
+````
 
 ## Directories
 name  | description 
