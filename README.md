@@ -23,10 +23,7 @@ docker-compose up --build
 ````
 
 ### 4. Create database and user
-reference:
-```` 
-./mysql/docker-entrypoint-initdb.d/createdb.sql.example
-````
+reference: https://github.com/yw4c/go-translate-compose/blob/master/mysql/docker-entrypoint-initdb.d/createdb.sql.example
 
 ## Directories
 name  | description 
